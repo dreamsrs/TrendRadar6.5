@@ -73,8 +73,6 @@ platforms:
       name: "贴吧"
     - id: "weibo"
       name: "微博"
-    - id: "douyin"
-      name: "抖音"
     - id: "zhihu"
       name: "知乎"
 
@@ -169,9 +167,9 @@ report:
   # false: 按匹配到的热点条数排序（条数多的在前）
   sort_by_position_first: false
 
-  rank_threshold: 5                   # 排名高亮阈值（影响展示强调，不改变抓取范围）
+  rank_threshold: 10                   # 排名高亮阈值（影响展示强调，不改变抓取范围）
 
-  max_news_per_keyword: 0             # 每个关键词/标签最大显示数量（0=不限制，仅影响展示裁剪）
+  max_news_per_keyword: 3             # 每个关键词/标签最大显示数量（0=不限制，仅影响展示裁剪）
 
 
 # ===============================================================
@@ -209,7 +207,7 @@ filter:
 # - 模型配置统一在下方 ai 段
 # ===============================================================
 ai_filter:
-  batch_size: 100                         # 每批发送给 AI 的标题数（控制单次 API 调用量）
+  batch_size: 50                         # 每批发送给 AI 的标题数（控制单次 API 调用量）
                                           # 新闻超过此数量时自动分批处理
   batch_interval: 2                       # 分批处理时，每批之间的等待时间（秒）
                                           # 避免频繁调用 API 触发限流，设为 0 则不等待
@@ -271,7 +269,7 @@ display:
     ai_analysis: true # AI 分析区域
   standalone:
     platforms: ["zhihu","baidu"] # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
-    rss_feeds: [] # RSS 源 ID 列表（如 ["hacker-news"]）
+    rss_feeds: ["ruanyifeng"] # RSS 源 ID 列表（如 ["hacker-news"]）
     max_items: 2                     # 每个源最多展示条数（0=不限制）
 
 
@@ -487,7 +485,7 @@ ai_analysis:
   mode: "follow_report"
 
   # 分析内容配置
-  max_news_for_analysis: 100        # 热榜+RSS 合计参与分析的新闻数量上限（控制成本关键项）
+  max_news_for_analysis: 80        # 热榜+RSS 合计参与分析的新闻数量上限（控制成本关键项）
                                     # 热榜优先占用配额，RSS 使用剩余配额；独立展示区不受此限制
                                     # 推送消息顶部会显示实际的 AI 分析数供参考
 
